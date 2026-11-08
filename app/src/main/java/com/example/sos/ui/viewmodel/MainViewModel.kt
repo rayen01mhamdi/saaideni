@@ -101,11 +101,15 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val lastLoc = locationHelper.getLastKnownLocation()
             if (lastLoc != null) {
                 _locationData.value = lastLoc
+                val detected = CountryRepository.detectCountryCode(lastLoc.latitude, lastLoc.longitude)
+                userPrefsRepo.setSelectedCountryCode(detected)
             }
 
             try {
                 locationHelper.requestLocationUpdates().collect { loc ->
                     _locationData.value = loc
+                    val detected = CountryRepository.detectCountryCode(loc.latitude, loc.longitude)
+                    userPrefsRepo.setSelectedCountryCode(detected)
                 }
             } catch (e: Exception) {}
         }

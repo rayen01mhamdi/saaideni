@@ -274,4 +274,30 @@ object CountryRepository {
     fun getDefaultCountry(): CountryEmergency {
         return countries.first { it.code == "US" }
     }
+
+    fun detectCountryCode(lat: Double, lon: Double): String {
+        return when {
+            lat in 24.0..50.0 && lon in -125.0..-66.0 -> "US"
+            lat in 41.0..51.5 && lon in -5.0..10.0 -> "FR"
+            lat in 49.9..60.9 && lon in -8.2..1.8 -> "GB"
+            lat in 16.0..32.5 && lon in 34.5..55.7 -> "SA"
+            lat in 22.0..31.8 && lon in 24.7..37.0 -> "EG"
+            lat in 22.5..26.3 && lon in 51.5..56.5 -> "AE"
+            lat in 47.2..55.1 && lon in 5.8..15.0 -> "DE"
+            lat in 24.0..45.5 && lon in 122.9..153.9 -> "JP"
+            lat in 36.0..43.8 && lon in -9.3..3.4 -> "ES"
+            lat in 35.5..47.1 && lon in 6.6..18.5 -> "IT"
+            lat in 35.8..42.1 && lon in 25.6..44.8 -> "TR"
+            lat in 41.7..83.1 && lon in -141.0..-52.6 -> "CA"
+            lat in -43.7..-10.6 && lon in 113.3..153.6 -> "AU"
+            lat in 27.6..35.9 && lon in -13.2..-1.0 -> "MA"
+            lat in 5.6..20.5 && lon in 97.3..105.6 -> "TH"
+            lat in 33.0..38.6 && lon in 124.6..131.0 -> "KR"
+            lat in 18.0..53.5 && lon in 73.5..135.0 -> "CN"
+            lat in -33.8..5.3 && lon in -74.0..-34.8 -> "BR"
+            lat in 14.5..32.7 && lon in -118.4..-86.7 -> "MX"
+            lat in 45.8..47.8 && lon in 5.9..10.5 -> "CH"
+            else -> "US"
+        }
+    }
 }
